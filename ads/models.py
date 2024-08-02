@@ -11,7 +11,8 @@ class Ad(models.Model):
     description = models.TextField(verbose_name='описание', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор объявления')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор объявления', related_name='ad',
+                               blank=True, null=True)
 
     class Meta:
         verbose_name = 'объявление'
@@ -28,8 +29,9 @@ class Review(models.Model):
     text = models.TextField(verbose_name='содержание отзыва')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
 
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, verbose_name='объявление')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор отзыва')
+    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, verbose_name='объявление', related_name='review')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор отзыва', related_name='review',
+                               blank=True, null=True)
 
     class Meta:
         verbose_name = 'отзыв'
