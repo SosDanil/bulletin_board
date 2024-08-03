@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
 from ads.models import Ad, Review
@@ -7,6 +8,8 @@ from ads.serializers import AdSerializer, ReviewSerializer
 class AdListAPIView(ListAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('title',)
 
 
 class AdRetrieveAPIView(RetrieveAPIView):
