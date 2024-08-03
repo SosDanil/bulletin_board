@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
 from ads.models import Ad, Review
+from ads.pagination import AdsPagination
 from ads.serializers import AdSerializer, ReviewSerializer
 
 
@@ -10,6 +11,7 @@ class AdListAPIView(ListAPIView):
     serializer_class = AdSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('title',)
+    pagination_class = AdsPagination
 
 
 class AdRetrieveAPIView(RetrieveAPIView):
