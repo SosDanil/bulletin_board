@@ -11,3 +11,9 @@ class IsAdministrator(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.user.groups.filter(name='Администраторы').exists()
+
+
+class IsUserHimself(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        return request.user.email == obj.email
