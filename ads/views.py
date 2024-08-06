@@ -40,7 +40,7 @@ class AdCreateAPIView(CreateAPIView):
 class AdUpdateAPIVIew(UpdateAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
-    permission_classes = (IsAuthor | IsAdministrator,)
+    permission_classes = (IsAuthor | IsAdministrator, IsAuthenticated)
 
     def permission_denied(self, request, message=DENIED_MESSAGE, code=None):
         if request.authenticators and not request.successful_authenticator:
@@ -50,7 +50,7 @@ class AdUpdateAPIVIew(UpdateAPIView):
 
 class AdDestroyAPIView(DestroyAPIView):
     queryset = Ad.objects.all()
-    permission_classes = (IsAuthor | IsAdministrator,)
+    permission_classes = (IsAuthor | IsAdministrator, IsAuthenticated)
 
     def permission_denied(self, request, message=DENIED_MESSAGE, code=None):
         if request.authenticators and not request.successful_authenticator:
@@ -61,13 +61,13 @@ class AdDestroyAPIView(DestroyAPIView):
 class ReviewListAPIVIew(ListAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
 
 class ReviewRetrieveAPIView(RetrieveAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = (IsAuthor | IsAdministrator,)
+    permission_classes = (IsAuthor | IsAdministrator, IsAuthenticated)
 
     def permission_denied(self, request, message=DENIED_MESSAGE, code=None):
         if request.authenticators and not request.successful_authenticator:
@@ -89,7 +89,7 @@ class ReviewCreateAPIView(CreateAPIView):
 class ReviewUpdateAPIView(UpdateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = (IsAuthor | IsAdministrator,)
+    permission_classes = (IsAuthor | IsAdministrator, IsAuthenticated)
 
     def permission_denied(self, request, message=DENIED_MESSAGE, code=None):
         if request.authenticators and not request.successful_authenticator:
@@ -99,7 +99,7 @@ class ReviewUpdateAPIView(UpdateAPIView):
 
 class ReviewDestroyAPIView(DestroyAPIView):
     queryset = Review.objects.all()
-    permission_classes = (IsAuthor | IsAdministrator,)
+    permission_classes = (IsAuthor | IsAdministrator, IsAuthenticated)
 
     def permission_denied(self, request, message=DENIED_MESSAGE, code=None):
         if request.authenticators and not request.successful_authenticator:
