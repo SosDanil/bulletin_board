@@ -31,24 +31,25 @@ class UserListAPIView(ListAPIView):
 class UserRetrieveAPIView(RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = (IsUserHimself,)
+    permission_classes = (IsUserHimself, IsAuthenticated)
 
 
 class UserUpdateAPIView(UpdateAPIView):
     serializer_class = UserCreateUpdateSerializer
     queryset = User.objects.all()
-    permission_classes = (IsUserHimself,)
+    permission_classes = (IsUserHimself, IsAuthenticated)
 
 
 class UserDestroyAPIView(DestroyAPIView):
     queryset = User.objects.all()
-    permission_classes = (IsUserHimself,)
+    permission_classes = (IsUserHimself, IsAuthenticated)
 
 
 class ResetPassword(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         email = request.data['email']
         token = secrets.token_hex(8)
         user = request.user
@@ -70,7 +71,8 @@ class ResetPassword(APIView):
 class ResetPasswordConfirm(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         uid = request.data['uid']
         token = request.data['token']
         new_password = request.data['new_password']
