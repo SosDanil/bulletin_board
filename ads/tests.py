@@ -82,11 +82,7 @@ class UnauthorizedUserTestCase(APITestCase):
 
         self.assertEqual(
             response.status_code,
-            status.HTTP_200_OK
-        )
-        self.assertEqual(
-            data[0]['text'],
-            'good for this price'
+            status.HTTP_401_UNAUTHORIZED
         )
 
     def test_review_retrieve(self):

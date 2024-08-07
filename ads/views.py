@@ -61,7 +61,7 @@ class AdDestroyAPIView(DestroyAPIView):
 class ReviewListAPIVIew(ListAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class ReviewRetrieveAPIView(RetrieveAPIView):
