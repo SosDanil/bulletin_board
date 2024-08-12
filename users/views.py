@@ -61,7 +61,7 @@ class ResetPassword(APIView):
         url = f"http://{host}/uid:{uid}/token:{token}/"
         send_mail(
             subject='Восстановление пароля',
-            message=f'Привет! Держите ссылку: {url}',
+            message=f'Привет! Держите ссылку с данными для смены пароля: {url}',
             from_email=EMAIL_HOST_USER,
             recipient_list=[email],
         )
