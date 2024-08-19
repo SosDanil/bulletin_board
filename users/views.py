@@ -39,11 +39,6 @@ class UserUpdateAPIView(UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsUserHimself, IsAuthenticated)
 
-    def perform_update(self, serializer):
-        obj = serializer.save
-        obj.set_password(self.request.data['password'])
-        obj.save()
-
 
 class UserDestroyAPIView(DestroyAPIView):
     queryset = User.objects.all()
